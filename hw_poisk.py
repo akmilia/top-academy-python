@@ -33,4 +33,4 @@ print("To be  \n or not \n to be")
 #  when
 #  you’re busy making other plans”
 #  John Lennon. 
-print("“Life is what happens \n when \n you’re busy making other plans” \n John Lennon.")
+print("“Life is what happens \n\t when \n\t\t you’re busy making other plans” \n\t\t\t John Lennon.")
