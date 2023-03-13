@@ -1,3 +1,4 @@
+
 // Тема: Строки и умные указатели
 // Задание.
 // Создайте пользовательские классы умных указателей.
@@ -66,10 +67,10 @@ public:
         delete count;
     }
  
-    t& operator* () {
+    T& operator* () {
         return *ptr;
     }
-    t* operator->() {
+    T* operator->() {
         return ptr;
     }
    
