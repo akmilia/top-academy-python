@@ -5,8 +5,8 @@
 # слева направо и справа налево. Например, кок; А роза
 # упала на лапу Азора; доход; А буду я у дуба.  
 
-def is_palindrome(input_string):
-    no_spaces = input_string.lower().replace(" ", "")
+def is_palindrome(input_proving):
+    no_spaces = input_proving.lower().replace(" ", "")
     return no_spaces == no_spaces[::-1]
     
 phrase = input("Введите фразу: ")
@@ -29,7 +29,7 @@ for i in range(len(spisok)):
 
 print(text)
 #Задание 3
-str = "Задание 3. Есть некоторый текст. на экран полученный результат." 
-print("Number of sentences ", str.find('.'))
+prov = "Задание 3. Есть некоторый текст. на экран полученный результат." 
+print("Number of sentences ", prov.find('.'))
   
 
