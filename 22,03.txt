@@ -1,0 +1,87 @@
+import tkinter as tk
+
+root = tk.Tk() #создание окна
+
+root.title("Task-Form")
+root.resizable(False, False)
+root.geometry("400x400")
+#
+# #everything for name
+# pole1 = tk.Label(root, text="Name: ", background="beige")
+# pole1.pack(pady=4,anchor="center")
+# user_input = tk.Entry(root)
+# user_input.pack(anchor="center", pady=2)
+#
+#
+# #everything for surname
+# pole2 = tk.Label(root, text="Surname: ", background="beige")
+# pole2.pack(pady=2,anchor="center")
+# user_input1 = tk.Entry(root)
+# user_input1.pack(anchor="center", pady=2)
+#
+#
+# pole_vivod=tk.Label(root, text="Vivod:")
+# pole_vivod.pack(anchor="center", pady=15)
+#
+#
+# def show_message():
+#     pole_vivod["text"] = user_input.get() + " " + user_input1.get()  # получаем введенный текст
+#     #pole_vivod["text"] = user_input1.get()  # получаем введенный текст
+#
+#
+# btn = tk.Button(text="Show message", command=show_message)
+# btn.pack(anchor="s", padx=2, pady=2)
+#
+# pole5 = tk.Label(root, text="CHECK")
+# pole5.pack(anchor="center", pady=50)
+# def check():
+#     # global
+#     flag = False
+#
+#
+#     name = user_input.get()
+#     surname = user_input1.get()
+#     #check text
+#     if name.isalpha():
+#         flag=True
+#     if surname.isalpha():
+#         flag= True
+#     # check space
+#
+#     ch = " "
+#
+#     if ch in name:
+#         flag= True
+#     if ch in surname:
+#         flag= True
+#     #check emptiness
+#     if(name == "" or surname == ""):
+#         flag = True
+#
+#     if flag==True:
+#         pole5.config(text="WRONG")
+#         flag = False
+#     else:
+#         pole5.config(text="OK")
+#
+#
+#
+#
+# button = tk.Button(root, text="Нажми чтобы проверить", command=check)
+# button.pack(anchor="center", pady=10, padx=10)
+
+def name_button(btn):
+    label.config(text = btn["text1"])
+
+for c in range(3): root.columnconfigure(index=c, weight=1)
+for r in range(3): root.rowconfigure(index=r, weight=1)
+
+
+for r in range(3):
+    for c in range(3):
+        btn1 = tk.Button(text=f"({r},{c})")
+        btn1.grid(row=r, column=c)
+
+label = tk.Label(root, text="CHECK")
+label.grid(row=5, column=5, columnspan=10)
+root.mainloop() #запуск
