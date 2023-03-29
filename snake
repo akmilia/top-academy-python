@@ -1,0 +1,118 @@
+import  pygame
+import random
+
+SCREEN_WIDTH = 500
+SCREEN_HEIGHT = 500
+BLOCK_SIZE = SCREEN_HEIGHT//30
+
+WHITE = (255, 255, 255)
+BLACK =(0, 0, 0)
+BLUE = (255, 255, 75)
+OLIVE = (125, 150,150)
+EMERALD = (0, 59, 20)
+
+LEFT =1
+RIGHT=2
+UP =3
+DOWN = 4
+
+pygame.init()
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Snape")
+
+
+def draw_snake(snake_list):
+    for block in snake_list:
+        pygame.draw.rect(screen, WHITE, [block[0], block[1], BLOCK_SIZE, BLOCK_SIZE])
+
+items = []
+for i in range(1):
+    item_x = random.randint(BLOCK_SIZE, SCREEN_WIDTH - BLOCK_SIZE)
+    item_y = random.randint(BLOCK_SIZE, SCREEN_HEIGHT - BLOCK_SIZE)
+    items.append((item_x, item_y))
+
+def draw_items(item):
+    for i in items:
+        pygame.draw.ellipse(screen, OLIVE, [item_x, item_y, BLOCK_SIZE, BLOCK_SIZE])
+
+def check_collision(items, snake_x, snake_y):
+    eat =0
+    for item in items:
+        if snake_x <= item[0] + BLOCK_SIZE and snake_x + BLOCK_SIZE >= item[0] \
+        and snake_y <= item[1] + BLOCK_SIZE and snake_y + BLOCK_SIZE >= item[1]:
+            items.remove(item)
+    if len(items)==0:
+        eat =1
+        item_x = random.randint(BLOCK_SIZE, SCREEN_WIDTH - BLOCK_SIZE)
+        item_y = random.randint(BLOCK_SIZE, SCREEN_HEIGHT - BLOCK_SIZE)
+        items.append((item_x, item_y))
+    return eat
+
+def check_collision_snake(snake_list, snake_x, snake_y, snake_head):
+    for i in snake_list:
+        if i != snake_list[0]:
+            if i[0] < snake_list[0][0] + BLOCK_SIZE and i[0] + BLOCK_SIZE>snake_list[0][0]:
+                if i[1] < snake_list[0][1] + BLOCK_SIZE and i[1] + BLOCK_SIZE>snake_list[0][1]:
+                    print("x",snake_list[0][0], "y", snake_list[0][1] )
+                    pygame.quit()
+                    exit()
+
+
+def main_loop():
+    # Иницилизация игрока
+    snake_x = SCREEN_WIDTH / 2
+    snake_y = SCREEN_HEIGHT / 2
+
+    snake_list = [[snake_x, snake_y]]
+    snake_len = 1 # Фактическая длинна змеи
+    snake_dir = LEFT
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                # Обработка нажатий
+                pressed = pygame.key.get_pressed()
+                if pressed[pygame.K_LEFT]:
+                    snake_dir = LEFT
+                if pressed[pygame.K_RIGHT]:
+                    snake_dir = RIGHT
+                if pressed[pygame.K_UP]:
+                    snake_dir = UP
+                if pressed[pygame.K_DOWN]:
+                    snake_dir = DOWN
+                if pressed[pygame.K_SPACE]:
+                    snake_len += 1
+
+        # Проверка На изменение направления
+        if snake_dir == LEFT:
+            snake_x -= BLOCK_SIZE
+        if snake_dir == RIGHT:
+            snake_x += BLOCK_SIZE
+        if snake_dir == UP:
+            snake_y -= BLOCK_SIZE
+        if snake_dir == DOWN:
+            snake_y += BLOCK_SIZE
+
+
+        # Движение змеи
+        snake_head = [snake_x, snake_y]
+        snake_list.insert(0, snake_head) # Добвление новой головы
+        if len(snake_list) > snake_len:
+         # Если размер змеи не изменился
+            del snake_list[-1]    # Удаление последнего элемента
+
+        snake_len += check_collision(items, snake_x, snake_y)
+        screen.fill(EMERALD)
+        draw_snake(snake_list)
+        draw_items(items)
+        pygame.display.update()
+        # check_collision_snake(snake_list, snake_x, snake_y, snake_head)
+        pygame.time.Clock().tick(10)
+
+
+
+if __name__=="__main__":
+    main_loop()
