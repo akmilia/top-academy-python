@@ -31,6 +31,12 @@ int count_w(const char * str, char sep)
 
    return count; 
    
+} 
+
+int count_char_in_w(const char *str,  char sep) 
+{
+     int len =0; 
+     while (str[len] != sep || isspace(str[len]) )
 }
 
 char** my_split( const char * str, char sep=' ') 
@@ -39,7 +45,7 @@ char** my_split( const char * str, char sep=' ')
 
     char ** split_str = new char * [count_w(str, sep) +1];
 
-    char * tmp; 
+    char * tmp = new char[count_char_in_w(str, sep)]; 
 
 //     for (int i = 0; str[i] != '\0'; ++i)
 //     {
@@ -62,7 +68,7 @@ char** my_split( const char * str, char sep=' ')
 //         result.push_back(temp); 
 //     }
    
-//    return result; 
+        return split_str; 
     
 }
 
